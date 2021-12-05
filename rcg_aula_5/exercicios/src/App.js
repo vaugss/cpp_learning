@@ -1,4 +1,4 @@
-import "./App.css";
+import classes from "./App.css";
 import Person from "./Person/Person";
 import React, { useState } from "react";
 
@@ -44,6 +44,7 @@ const App = (props) => {
   };
 
   let persons = null;
+  let btnClass = "";
 
   if (personsState.showPersons) {
     persons = (
@@ -61,21 +62,22 @@ const App = (props) => {
         })}
       </div>
     );
+    btnClass = classes.Red;
   }
 
-  const classes = [];
+  const assignedClasses = [];
   if (personsState.persons.length <= 2) {
-    classes.push("red"); //classes = ['red']
+    assignedClasses.push(classes.red); //assignedClasses = ['red']
   }
   if (personsState.persons.length <= 1) {
-    classes.push("bold"); //classes = ['red', 'bold']
+    assignedClasses.push(classes.bold); //assignedClasses = ['red', 'bold']
   }
 
   return (
-    <div className="App">
+    <div className={classes.App}>
       <h1>Hi, I'm React App</h1>
-      <p className={classes}>This is really working!</p>
-      <button className="button" onClick={togglePersonHandler}>
+      <p className={assignedClasses}>This is really working!</p>
+      <button className={btnClass} onClick={togglePersonHandler}>
         Toggle Persons
       </button>
       {persons}
