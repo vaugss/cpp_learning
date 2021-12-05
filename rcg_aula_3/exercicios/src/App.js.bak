@@ -1,0 +1,51 @@
+import "./App.css";
+import Person from "./Person/Person";
+import React, { Component } from "react";
+
+class App extends Component {
+  state = {
+    persons: [
+      { name: "Max", age: 28 },
+      { name: "Teste", age: 21 },
+      { name: "Cida", age: 29 },
+    ],
+  };
+
+  swtichNameHandler = () => {
+    //console.log("button clicked");
+    //DONT DO THIS: this.state.persons[0].name = 'Teste';
+    this.setState({
+      persons: [
+        { name: "MadMax", age: 28 },
+        { name: "Maria", age: 21 },
+        { name: "José", age: 29 },
+      ],
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Hi, I'm React App</h1>
+        <p>This is really working!</p>
+        <button onClick={this.swtichNameHandler}>Switch Name</button>
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}
+        />
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}
+        >
+          My hobbies: Racing
+        </Person>
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}
+        />
+      </div>
+    );
+  }
+}
+
+export default App;
