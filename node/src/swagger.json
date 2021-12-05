@@ -1,0 +1,219 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Node API documentation following rocketseat classes",
+    "version": "1.0",
+    "title": "Node API documentation",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "vaugsantos@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Ambiente de teste"
+    },
+    {
+      "url": "http://localhost:3002",
+      "description": "[Teste] Seria o ambiente de produção"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "User register",
+        "description": "Route used to register a new user. Email must be unique.",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Victor",
+                    "email": "victor5@teste.com",
+                    "password": "teste"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "User already exists | Registration failed"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/authenticate": {
+      "post": {
+        "summary": "User authentication",
+        "description": "Route used to authenticate a registered user.",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "parameters": [
+                {
+                  "name": "email",
+                  "required": true,
+                  "type": "String"
+                },
+                {
+                  "name": "password",
+                  "required": true,
+                  "type": "String"
+                }
+              ],
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "victor5@teste.com",
+                    "password": "teste"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "User not found | Invalid password"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/forgot_password": {
+      "post": {
+        "summary": "Forgot Password",
+        "description": "Route used to recovery password. An email is sent with a temporary token for this.",
+        "tags": ["User"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "parameters": [
+                {
+                  "name": "email",
+                  "required": true,
+                  "type": "String"
+                }
+              ],
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "victor5@teste.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "User not found | Cannot send forgot password email | Error on forgot password, try again"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/reset_password": {
+      "post": {
+        "summary": "Reset Password",
+        "description": "Route used to reset password. An email is sent with a temporary token for this.",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "email",
+            "required": true,
+            "type": "String"
+          },
+          {
+            "name": "password",
+            "required": true,
+            "type": "String"
+          },
+          {
+            "name": "token",
+            "required": true,
+            "type": "String"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "User not found | Cannot send forgot password email | Error on forgot password, try again"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "passwordResetToken": {
+            "type": "string"
+          },
+          "passwordResetExpires": {
+            "type": "Date"
+          },
+          "createdAt": {
+            "type": "Date"
+          }
+        }
+      }
+    }
+  },
+  "securitySchemes": {
+    "bearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  }
+}
