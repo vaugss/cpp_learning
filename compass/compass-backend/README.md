@@ -52,8 +52,8 @@ Verify the deployment using the docker ps command in bash.
 docker ps -a
 ```
 
-Then, you can register some users in mongodb database and test if everything works as expected sending
-HTTP requests to the following endpoints, fron http://localhost:3001:
+Then, you can register some users and posts and test if everything works as expected sending
+HTTP requests to the following endpoints, from http://localhost:3001:
 
 ```sh
     "/api": "api docs",
@@ -67,5 +67,7 @@ HTTP requests to the following endpoints, fron http://localhost:3001:
     "/api/posts/by/:userId": "get posts by user",
     "/api/post/:postId": "update/delete post"
 ```
+
+For this, use some tool like Thunder-Client, Postman, Insomnia or cURL.
 
 
