@@ -1,0 +1,51 @@
+Arguments: 
+  /usr/local/bin/node /opt/yarn-v1.22.15/bin/yarn.js start
+
+PATH: 
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+Yarn version: 
+  1.22.15
+
+Node version: 
+  17.1.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /usr/src/docker-example/package.json: Unexpected token / in JSON at position 167
+      at JSON.parse (<anonymous>)
+      at /opt/yarn-v1.22.15/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/opt/yarn-v1.22.15/lib/cli.js:310:30)
+      at /opt/yarn-v1.22.15/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "node-api",
+    "version": "0.0.0",
+    "main": "index.js",
+    "license": "MIT",
+      "scripts": {
+      "dev": "nodemon -- -r esm -r dotenv/config index.js",
+      //"start": "pm2 start index.js --watch --no-daemon --node-args=\"-r esm -r dotenv/config\""
+      "start": "pm2 start index.js --watch --no-daemon --node-args=\"-r esm\""
+    },
+    "dependencies": {
+      "esm": "^3.2.25",
+      "mongoose": "^5.8.7",
+      "pm2": "^4.2.1",
+      "restify": "^8.5.1"
+    },
+    "devDependencies": {
+      "dotenv": "^8.2.0",
+      "nodemon": "^2.0.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
